@@ -95,6 +95,8 @@ static RACSignal *signalOfPosts(void) {
     [self.titleLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self withOffset:-20];
     [self.titleLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
 
+    [self.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+
     [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop];
     [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom];
     [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:10];
