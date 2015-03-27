@@ -13,6 +13,7 @@
 		3F7DB7BC1AC3C30800746DCF /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7DB7BB1AC3C30800746DCF /* MainVC.m */; };
 		3F7DB7C11AC3C30800746DCF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DB7C01AC3C30800746DCF /* Images.xcassets */; };
 		3F7DB7C41AC3C30800746DCF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F7DB7C21AC3C30800746DCF /* LaunchScreen.xib */; };
+		3FF2952E1AC4DA22004AB37A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FF2952D1AC4DA22004AB37A /* Main.storyboard */; };
 		9F500FEA9BA230C7C11DD787 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7A1F3B7DD15AF3D455B50A /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 		3F7DB7C01AC3C30800746DCF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3F7DB7C31AC3C30800746DCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3FBDF30D1AC3CAF100705E68 /* Secrets.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
+		3FF2952D1AC4DA22004AB37A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		CD7A1F3B7DD15AF3D455B50A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC301F2EAF8499FC2962BDEE /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +79,7 @@
 				3F7DB7B01AC3C30800746DCF /* Supporting Files */,
 				3F0374F51AC3C3D800353F1C /* Prelude.pch */,
 				3FBDF30D1AC3CAF100705E68 /* Secrets.h */,
+				3FF2952D1AC4DA22004AB37A /* Main.storyboard */,
 			);
 			path = divinemercy;
 			sourceTree = "<group>";
@@ -166,6 +169,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FF2952E1AC4DA22004AB37A /* Main.storyboard in Resources */,
 				3F7DB7C41AC3C30800746DCF /* LaunchScreen.xib in Resources */,
 				3F7DB7C11AC3C30800746DCF /* Images.xcassets in Resources */,
 			);
