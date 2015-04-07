@@ -23,6 +23,7 @@ PODS:
   - MagicalRecord (2.2):
     - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
+  - NSString+Ruby (1.1)
   - PureLayout (2.0.5)
   - ReactiveCocoa (2.4.7):
     - ReactiveCocoa/UI (= 2.4.7)
@@ -35,13 +36,15 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - MagicalRecord
+  - NSString+Ruby
   - PureLayout
   - ReactiveCocoa
 
 SPEC CHECKSUMS:
-  AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
-  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
-  PureLayout: 63a3257320223e8edddcd3afb407445f85a6bf74
-  ReactiveCocoa: 313fc53cc9aeb2bbbc3f5f13c7eac16478d9af8f
+  AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
+  MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
+  NSString+Ruby: e68b2d9408107888f3d82436b0d1cd24c66c4b5b
+  PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
+  ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
 
 COCOAPODS: 0.36.0

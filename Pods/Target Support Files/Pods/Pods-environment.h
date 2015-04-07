@@ -60,6 +60,12 @@
 #define COCOAPODS_VERSION_MINOR_MagicalRecord_Core 2
 #define COCOAPODS_VERSION_PATCH_MagicalRecord_Core 0
 
+// NSString+Ruby
+#define COCOAPODS_POD_AVAILABLE_NSString_Ruby
+#define COCOAPODS_VERSION_MAJOR_NSString_Ruby 1
+#define COCOAPODS_VERSION_MINOR_NSString_Ruby 1
+#define COCOAPODS_VERSION_PATCH_NSString_Ruby 0
+
 // PureLayout
 #define COCOAPODS_POD_AVAILABLE_PureLayout
 #define COCOAPODS_VERSION_MAJOR_PureLayout 2
