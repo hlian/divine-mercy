@@ -8,3 +8,5 @@ pod 'MagicalRecord'
 pod 'PureLayout'
 pod 'NSString+Ruby'
 pod 'NSURL+QueryDictionary'
+
+link_with 'divinemercy', 'tests'
