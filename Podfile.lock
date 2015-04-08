@@ -24,6 +24,7 @@ PODS:
     - MagicalRecord/Core (= 2.2)
   - MagicalRecord/Core (2.2)
   - NSString+Ruby (1.1)
+  - NSURL+QueryDictionary (1.1.0)
   - PureLayout (2.0.5)
   - ReactiveCocoa (2.4.7):
     - ReactiveCocoa/UI (= 2.4.7)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - AFNetworking
   - MagicalRecord
   - NSString+Ruby
+  - NSURL+QueryDictionary
   - PureLayout
   - ReactiveCocoa
 
@@ -44,6 +46,7 @@ SPEC CHECKSUMS:
   AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
   MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
   NSString+Ruby: e68b2d9408107888f3d82436b0d1cd24c66c4b5b
+  NSURL+QueryDictionary: dd0a5fec689a9b4780b6fa0e0225c01ca3ea653e
   PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
 

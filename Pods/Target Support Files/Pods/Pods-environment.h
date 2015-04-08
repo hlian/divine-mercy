@@ -66,6 +66,12 @@
 #define COCOAPODS_VERSION_MINOR_NSString_Ruby 1
 #define COCOAPODS_VERSION_PATCH_NSString_Ruby 0
 
+// NSURL+QueryDictionary
+#define COCOAPODS_POD_AVAILABLE_NSURL_QueryDictionary
+#define COCOAPODS_VERSION_MAJOR_NSURL_QueryDictionary 1
+#define COCOAPODS_VERSION_MINOR_NSURL_QueryDictionary 1
+#define COCOAPODS_VERSION_PATCH_NSURL_QueryDictionary 0
+
 // PureLayout
 #define COCOAPODS_POD_AVAILABLE_PureLayout
 #define COCOAPODS_VERSION_MAJOR_PureLayout 2
