@@ -3,4 +3,4 @@ xcode_project: divinemercy.xcodeproj # path to your xcodeproj folder
 xcode_scheme: tests
 
 script:
-  - xcodebuild [DEFAULT_OPTIONS] CODE_SIGNING_REQUIRED=NO
+  - xctool -workspace divinemercy.xcworkspace -scheme tests -sdk iphonesimulator build test
