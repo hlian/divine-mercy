@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainNC.h"
 #import "MainVC.h"
 
 @interface AppDelegate ()
@@ -15,8 +16,8 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    self.window.tintColor = [UIColor purpleColor];
     self.window.rootViewController = [[MainNC alloc] initWithRootViewController:[[MainVC alloc] initWithNibName:nil bundle:nil]];
     [self.window makeKeyAndVisible];
     return YES;

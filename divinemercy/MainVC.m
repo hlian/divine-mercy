@@ -1,6 +1,5 @@
 #import "MainVC.h"
-
-#define kRectNonsense CGRectMake(0, 0, 100, 100)
+#import "LoginVC.h"
 
 @interface PostCentaur : NSObject
 
@@ -22,12 +21,6 @@
 @property (nonatomic, strong) UILabel *bodyLabel;
 
 @end
-
-static NSString *kAPI(NSString *s) {
-    NSURLComponents *comp = [NSURLComponents componentsWithString:@"https://basilica.horse/api"];
-    comp.path = [comp.path stringByAppendingPathComponent:s];
-    return comp.URL.absoluteString;
-}
 
 static PostCentaur *postOfJSON(NSDictionary *dict) {
     PostCentaur *centaur = [[PostCentaur alloc] init];
@@ -67,9 +60,6 @@ static RACSignal *signalOfPosts(void) {
 
 @end
 
-@implementation MainNC
-@end
-
 @implementation PostView
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -90,9 +80,9 @@ static RACSignal *signalOfPosts(void) {
     [self addSubview:self.titleLabel];
     [self addSubview:self.bodyLabel];
 
-    [self.bodyLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self withOffset:-20];
+    [self.bodyLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
     [self.bodyLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
-    [self.titleLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self withOffset:-20];
+    [self.titleLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
     [self.titleLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
 
     [self.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
@@ -111,19 +101,21 @@ static RACSignal *signalOfPosts(void) {
 }
 
 - (UILabel *)makeLabel {
-    UILabel *l = [[UILabel alloc] initWithFrame:kRectNonsense];
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectNonsense];
     l.translatesAutoresizingMaskIntoConstraints = NO;
     l.numberOfLines = 1;
     l.font = [UIFont boldSystemFontOfSize:15];
     l.preferredMaxLayoutWidth = 200;
+
     return l;
 }
 
 - (UILabel *)makeBody {
-    UILabel *l = [[UILabel alloc] initWithFrame:kRectNonsense];
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectNonsense];
     l.translatesAutoresizingMaskIntoConstraints = NO;
     l.numberOfLines = -1;
     l.lineBreakMode = NSLineBreakByWordWrapping;
+    l.font = [UIFont fontWithName:@"Verdana" size:13];
     return l;
 }
 
@@ -145,8 +137,14 @@ static RACSignal *signalOfPosts(void) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.contentView.layoutMargins = UIEdgeInsetsMake(10, 5, 10, 5);
+    cell.preservesSuperviewLayoutMargins = NO;
+
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    PostView *view = [[PostView alloc] initWithFrame:kRectNonsense];
+
+    PostView *view = [[PostView alloc] initWithFrame:CGRectNonsense];
     view.translatesAutoresizingMaskIntoConstraints = NO;
     view.post = self.posts[indexPath.row];
     [cell.contentView addSubview:view];
@@ -159,12 +157,25 @@ static RACSignal *signalOfPosts(void) {
 @implementation MainVC
 
 - (void)viewDidLoad {
+    @weakify(self);
     [super viewDidLoad];
     self.title = @"Divine Mercy";
+
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:nil action:nil];
+    self.navigationItem.leftBarButtonItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+        LoginVC *vc = [[LoginVC alloc] initWithCoder:nil];
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self);
+            [self presentViewController:vc animated:YES completion:^{
+                [subscriber sendCompleted];
+            }];
+            return nil;
+        }];
+    }];
 }
 
 - (UITableView *)makeTableView {
-    UITableView *t = [[UITableView alloc] initWithFrame:kRectNonsense style:UITableViewStylePlain];
+    UITableView *t = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 100, 100) style:UITableViewStylePlain];
     t.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     t.delegate = self;
     t.estimatedRowHeight = 100;
@@ -176,7 +187,7 @@ static RACSignal *signalOfPosts(void) {
 - (void)loadView {
     @weakify(self);
 
-    self.view = [[UIView alloc] initWithFrame:kRectNonsense];
+    self.view = [[UIView alloc] initWithFrame:CGRectNonsense];
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
 
     self.tableView = [self makeTableView];
