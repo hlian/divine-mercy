@@ -12,6 +12,7 @@
 #import "NSManagedObject+MagicalFinders.h"
 #import "NSManagedObject+MagicalRecord.h"
 #import "NSManagedObject+MagicalRequests.h"
+#import "NSManagedObjectContext+MagicalChainSave.h"
 #import "NSManagedObjectContext+MagicalObserving.h"
 #import "NSManagedObjectContext+MagicalRecord.h"
 #import "NSManagedObjectContext+MagicalSaves.h"
@@ -26,6 +27,8 @@
 #import "MagicalRecord+Setup.h"
 #import "MagicalRecord+ShorthandSupport.h"
 #import "MagicalRecord.h"
+#import "MagicalRecordDeprecated.h"
+#import "MagicalRecordLogging.h"
 #import "MagicalRecordShorthand.h"
 #import "CoreData+MagicalRecord.h"
 

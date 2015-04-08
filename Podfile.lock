@@ -20,9 +20,9 @@ PODS:
   - AFNetworking/UIKit (2.5.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - MagicalRecord (2.2):
-    - MagicalRecord/Core (= 2.2)
-  - MagicalRecord/Core (2.2)
+  - MagicalRecord (2.3.0-beta.5):
+    - MagicalRecord/Core (= 2.3.0-beta.5)
+  - MagicalRecord/Core (2.3.0-beta.5)
   - NSString+Ruby (1.1)
   - NSURL+QueryDictionary (1.1.0)
   - PureLayout (2.0.5)
@@ -36,15 +36,25 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - MagicalRecord
+  - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, commit `11e1dcdeb78261ae6b02304707d5220dc0cf95e8`)
   - NSString+Ruby
   - NSURL+QueryDictionary
   - PureLayout
   - ReactiveCocoa
 
+EXTERNAL SOURCES:
+  MagicalRecord:
+    :commit: 11e1dcdeb78261ae6b02304707d5220dc0cf95e8
+    :git: https://github.com/magicalpanda/MagicalRecord.git
+
+CHECKOUT OPTIONS:
+  MagicalRecord:
+    :commit: 11e1dcdeb78261ae6b02304707d5220dc0cf95e8
+    :git: https://github.com/magicalpanda/MagicalRecord.git
+
 SPEC CHECKSUMS:
   AFNetworking: 10e85a00bb0f475124e4ff2677bf15693b2c1523
-  MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
+  MagicalRecord: 32760b04d86a961b38fb29413780443212a1f62d
   NSString+Ruby: e68b2d9408107888f3d82436b0d1cd24c66c4b5b
   NSURL+QueryDictionary: dd0a5fec689a9b4780b6fa0e0225c01ca3ea653e
   PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
