@@ -36,7 +36,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, commit `11e1dcdeb78261ae6b02304707d5220dc0cf95e8`)
+  - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`, commit
+    `11e1dcdeb78261ae6b02304707d5220dc0cf95e8`)
   - NSString+Ruby
   - NSURL+QueryDictionary
   - PureLayout
@@ -60,4 +61,4 @@ SPEC CHECKSUMS:
   PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.36.4
