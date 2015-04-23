@@ -102,3 +102,9 @@
 #define COCOAPODS_VERSION_MINOR_ReactiveCocoa_no_arc 4
 #define COCOAPODS_VERSION_PATCH_ReactiveCocoa_no_arc 7
 
+// uicolor-utilities
+#define COCOAPODS_POD_AVAILABLE_uicolor_utilities
+#define COCOAPODS_VERSION_MAJOR_uicolor_utilities 1
+#define COCOAPODS_VERSION_MINOR_uicolor_utilities 0
+#define COCOAPODS_VERSION_PATCH_uicolor_utilities 1
+

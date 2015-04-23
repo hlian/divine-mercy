@@ -33,6 +33,7 @@ PODS:
   - ReactiveCocoa/no-arc (2.4.7)
   - ReactiveCocoa/UI (2.4.7):
     - ReactiveCocoa/Core
+  - UIColor-Utilities (1.0.1)
 
 DEPENDENCIES:
   - AFNetworking
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - NSURL+QueryDictionary
   - PureLayout
   - ReactiveCocoa
+  - uicolor-utilities
 
 EXTERNAL SOURCES:
   MagicalRecord:
@@ -60,5 +62,6 @@ SPEC CHECKSUMS:
   NSURL+QueryDictionary: dd0a5fec689a9b4780b6fa0e0225c01ca3ea653e
   PureLayout: a0fe75f1cf485801e7e00b723b8a3c32dca558e2
   ReactiveCocoa: eb38dee0a0e698f73a9b25e5c1faea2bb4c79240
+  UIColor-Utilities: 6746a54dcdb3bc012dd7aeaeea5588ae2100beb2
 
 COCOAPODS: 0.36.4

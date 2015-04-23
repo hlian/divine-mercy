@@ -87,6 +87,7 @@ static RACSignal *signalOfPosts(void) {
     @weakify(self);
     [super viewDidLoad];
     self.title = @"Divine Mercy";
+    self.view.backgroundColor = [UIColor color]
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:nil action:nil];
     self.navigationItem.leftBarButtonItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {

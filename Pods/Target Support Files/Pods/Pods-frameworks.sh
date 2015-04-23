@@ -54,6 +54,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'NSURL_QueryDictionary.framework'
   install_framework 'PureLayout.framework'
   install_framework 'ReactiveCocoa.framework'
+  install_framework 'UIColor_Utilities.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'AFNetworking.framework'
@@ -62,4 +63,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'NSURL_QueryDictionary.framework'
   install_framework 'PureLayout.framework'
   install_framework 'ReactiveCocoa.framework'
+  install_framework 'UIColor_Utilities.framework'
 fi
