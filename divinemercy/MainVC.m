@@ -129,15 +129,21 @@ static RACSignal *signalOfPosts(void) {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [UIView animateWithDuration:0.2 animations:^{
-        [self.tableView beginUpdates];
-        if ([self.posts.highlightedIndexPath isEqual:indexPath]) {
-            self.posts.highlightedIndexPath = nil;
-        } else {
-            self.posts.highlightedIndexPath = indexPath;
-        }
-        [self.tableView endUpdates];
-    }];
+    [UIView animateWithDuration:0.2
+                          delay:0
+         usingSpringWithDamping:0.75
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionBeginFromCurrentState
+                     animations:^{
+                         [self.tableView beginUpdates];
+                         if ([self.posts.highlightedIndexPath isEqual:indexPath]) {
+                             self.posts.highlightedIndexPath = nil;
+                         } else {
+                             self.posts.highlightedIndexPath = indexPath;
+                         }
+                         
+                         [self.tableView endUpdates];
+                     } completion:nil];
 }
 
 @end

@@ -9,6 +9,5 @@ pod 'MagicalRecord', :git => 'https://github.com/magicalpanda/MagicalRecord.git'
 pod 'PureLayout'
 pod 'NSString+Ruby'
 pod 'NSURL+QueryDictionary'
-pod 'pop'
 
 link_with 'divinemercy', 'tests'
