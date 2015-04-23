@@ -61,16 +61,23 @@ static RACSignal *signalOfPosts(void) {
     cell.layoutMargins = UIEdgeInsetsZero;
     cell.contentView.layoutMargins = UIEdgeInsetsMake(10, 5, 10, 5);
     cell.preservesSuperviewLayoutMargins = NO;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
     PostView *view = [[PostView alloc] initWithFrame:CGRectNonsense];
     view.translatesAutoresizingMaskIntoConstraints = NO;
     view.post = self.posts[indexPath.row];
+    view.highlightedSignal = [RACObserve(self, highlightedIndexPath) map:^id(NSIndexPath *path) {
+        return @([path isEqual:indexPath]);
+    }];
+
+    [RACObserve(self, highlightedIndexPath) logNext];
     [cell.contentView addSubview:view];
     [view autoPinEdgesToSuperviewMargins];
     return cell;
 }
+
 
 @end
 
@@ -121,7 +128,16 @@ static RACSignal *signalOfPosts(void) {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.posts.highlightedIndexPath = indexPath;
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [UIView animateWithDuration:0.2 animations:^{
+        [self.tableView beginUpdates];
+        if ([self.posts.highlightedIndexPath isEqual:indexPath]) {
+            self.posts.highlightedIndexPath = nil;
+        } else {
+            self.posts.highlightedIndexPath = indexPath;
+        }
+        [self.tableView endUpdates];
+    }];
 }
 
 @end

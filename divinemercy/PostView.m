@@ -9,6 +9,15 @@
 #import "PostCentaur.h"
 #import "PostView.h"
 
+@interface PostView ()
+
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *bodyLabel;
+@property (nonatomic, strong) UIView *actionView;
+
+
+@end
+
 @implementation PostView
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -24,22 +33,26 @@
 }
 
 - (void)prepare {
+    @weakify(self);
+
     self.titleLabel = [self makeLabel];
     self.bodyLabel = [self makeBody];
+    self.actionView = [self makeActionView];
     [self addSubview:self.titleLabel];
     [self addSubview:self.bodyLabel];
+    [self addSubview:self.actionView];
 
-    [self.bodyLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
-    [self.bodyLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
-    [self.titleLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
-    [self.titleLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
+    for (UIView *view in @[self.bodyLabel, self.titleLabel, self.actionView]) {
+        [view autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
+        [view autoAlignAxisToSuperviewAxis:ALAxisVertical];
+    }
 
     [self.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
 
     [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop];
-    [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom];
     [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:10];
-    [self autoSetDimension:ALDimensionHeight toSize:100 relation:NSLayoutRelationEqual];
+    [self.bodyLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.actionView];
+    [self.actionView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self];
 
     RAC(self, titleLabel.text) = [[RACObserve(self, post) ignore:nil] map:^id(PostCentaur *post) {
         return post.author;
@@ -48,6 +61,24 @@
     RAC(self, bodyLabel.text) = [[RACObserve(self, post) ignore:nil] map:^id(PostCentaur *post) {
         return post.body;
     }];
+
+    [[[RACObserve(self, highlightedSignal) switchToLatest] ignore:@NO] subscribeNext:^(id value) {
+        @strongify(self);
+        [ALView autoSetPriority:UILayoutPriorityDefaultLow forConstraints:^{
+        NSLayoutConstraint *constraint =
+            [self.actionView autoSetDimension:ALDimensionHeight toSize:self.actionHeight relation:NSLayoutRelationEqual];
+            [self layoutIfNeeded];
+            [[[self.highlightedSignal ignore:@YES] take:1] subscribeNext:^(id x) {
+                @strongify(self);
+                [constraint autoRemove];
+                [self layoutIfNeeded];
+            }];
+        }];
+    }];
+}
+
+- (CGFloat)actionHeight {
+    return 100;
 }
 
 - (UILabel *)makeLabel {
@@ -67,6 +98,12 @@
     l.lineBreakMode = NSLineBreakByWordWrapping;
     l.font = [UIFont fontWithName:@"Verdana" size:13];
     return l;
+}
+
+- (UIView *)makeActionView {
+    UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
+    v.translatesAutoresizingMaskIntoConstraints = NO;
+    return v;
 }
 
 - (void)layoutSubviews {
