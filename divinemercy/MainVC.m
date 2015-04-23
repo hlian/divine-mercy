@@ -62,6 +62,7 @@ static RACSignal *signalOfPosts(void) {
     cell.contentView.layoutMargins = UIEdgeInsetsMake(10, 5, 10, 5);
     cell.preservesSuperviewLayoutMargins = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.backgroundColor = [UIColor colorWithRGBAHex:0xf3f6d7ff];
 
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
@@ -87,7 +88,6 @@ static RACSignal *signalOfPosts(void) {
     @weakify(self);
     [super viewDidLoad];
     self.title = @"Divine Mercy";
-    self.view.backgroundColor = [UIColor color]
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:nil action:nil];
     self.navigationItem.leftBarButtonItem.rac_command = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
