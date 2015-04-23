@@ -1,24 +1,12 @@
 #import "MainVC.h"
 #import "LoginVC.h"
-
-@interface PostCentaur : NSObject
-
-@property (nonatomic, strong) NSString *author;
-@property (nonatomic, strong) NSString *body;
-
-@end
+#import "PostCentaur.h"
+#import "PostView.h"
 
 @interface PostsCentaur : NSObject <UITableViewDataSource>
 
 @property (nonatomic, strong) NSArray *posts;
-
-@end
-
-@interface PostView : UIView
-
-@property (nonatomic, strong) PostCentaur *post;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *bodyLabel;
+@property (nonatomic, strong) NSIndexPath *highlightedIndexPath;
 
 @end
 
@@ -60,74 +48,6 @@ static RACSignal *signalOfPosts(void) {
 
 @end
 
-@implementation PostView
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    NSParameterAssert(0);
-    return nil;
-}
-
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (!(self = [super initWithFrame:frame])) return nil;
-    [self prepare];
-    return self;
-}
-
-- (void)prepare {
-    self.titleLabel = [self makeLabel];
-    self.bodyLabel = [self makeBody];
-    [self addSubview:self.titleLabel];
-    [self addSubview:self.bodyLabel];
-
-    [self.bodyLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
-    [self.bodyLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
-    [self.titleLabel autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
-    [self.titleLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
-
-    [self.titleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
-
-    [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop];
-    [self.bodyLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom];
-    [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:10];
-
-    RAC(self, titleLabel.text) = [[RACObserve(self, post) ignore:nil] map:^id(PostCentaur *post) {
-        return post.author;
-    }];
-
-    RAC(self, bodyLabel.text) = [[RACObserve(self, post) ignore:nil] map:^id(PostCentaur *post) {
-        return post.body;
-    }];
-}
-
-- (UILabel *)makeLabel {
-    UILabel *l = [[UILabel alloc] initWithFrame:CGRectNonsense];
-    l.translatesAutoresizingMaskIntoConstraints = NO;
-    l.numberOfLines = 1;
-    l.font = [UIFont boldSystemFontOfSize:15];
-    l.preferredMaxLayoutWidth = 200;
-
-    return l;
-}
-
-- (UILabel *)makeBody {
-    UILabel *l = [[UILabel alloc] initWithFrame:CGRectNonsense];
-    l.translatesAutoresizingMaskIntoConstraints = NO;
-    l.numberOfLines = -1;
-    l.lineBreakMode = NSLineBreakByWordWrapping;
-    l.font = [UIFont fontWithName:@"Verdana" size:13];
-    return l;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.bodyLabel.preferredMaxLayoutWidth = self.bounds.size.width - 20;
-}
-
-@end
-
-@implementation PostCentaur
-@end
 
 @implementation PostsCentaur
 
@@ -198,6 +118,10 @@ static RACSignal *signalOfPosts(void) {
         self.tableView.dataSource = posts;
         [self.tableView reloadData];
     }];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.posts.highlightedIndexPath = indexPath;
 }
 
 @end
