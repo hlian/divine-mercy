@@ -78,7 +78,7 @@
 }
 
 - (CGFloat)actionHeight {
-    return 100;
+    return 44;
 }
 
 - (UILabel *)makeLabel {
@@ -103,6 +103,28 @@
 - (UIView *)makeActionView {
     UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
     v.translatesAutoresizingMaskIntoConstraints = NO;
+    v.clipsToBounds = YES;
+
+    UILabel *reply = [[UILabel alloc] initWithFrame:CGRectZero];
+    reply.translatesAutoresizingMaskIntoConstraints = NO;
+    reply.text = @"[reply]";
+    reply.font = [UIFont fontWithName:@"Verdana" size:13];
+    reply.textColor = [UIColor purpleColor];
+    [v addSubview:reply];
+
+    UILabel *fave = [[UILabel alloc] initWithFrame:CGRectZero];
+    fave.translatesAutoresizingMaskIntoConstraints = NO;
+    fave.text = @"[favorite]";
+    fave.font = [UIFont fontWithName:@"Verdana" size:13];
+    fave.textColor = [UIColor purpleColor];
+    [v addSubview:fave];
+
+
+    [reply autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
+    [reply autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
+    [fave autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
+    [fave autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:reply withOffset:10];
+
     return v;
 }
 
