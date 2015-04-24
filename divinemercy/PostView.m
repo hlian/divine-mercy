@@ -65,10 +65,10 @@
     [[[RACObserve(self, highlightedSignal) switchToLatest] ignore:@NO] subscribeNext:^(id value) {
         @strongify(self);
         [ALView autoSetPriority:UILayoutPriorityDefaultLow forConstraints:^{
-        NSLayoutConstraint *constraint =
-            [self.actionView autoSetDimension:ALDimensionHeight toSize:self.actionHeight relation:NSLayoutRelationEqual];
+            NSLayoutConstraint *constraint =
+                [self.actionView autoSetDimension:ALDimensionHeight toSize:self.actionHeight relation:NSLayoutRelationEqual];
             [self layoutIfNeeded];
-            [[[self.highlightedSignal ignore:@YES] take:1] subscribeNext:^(id x) {
+            [[[[self.highlightedSignal takeUntil:self.rac_willDeallocSignal] ignore:@YES] take:1] subscribeNext:^(id x) {
                 @strongify(self);
                 [constraint autoRemove];
                 [self layoutIfNeeded];
