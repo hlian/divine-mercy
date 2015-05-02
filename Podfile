@@ -10,5 +10,7 @@ pod 'PureLayout'
 pod 'NSString+Ruby'
 pod 'NSURL+QueryDictionary'
 pod 'uicolor-utilities'
+pod 'UIView+Positioning'
+pod 'CLKSingletons'
 
 link_with 'divinemercy', 'tests'

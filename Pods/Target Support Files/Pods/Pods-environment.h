@@ -48,6 +48,12 @@
 #define COCOAPODS_VERSION_MINOR_AFNetworking_UIKit 5
 #define COCOAPODS_VERSION_PATCH_AFNetworking_UIKit 1
 
+// CLKSingletons
+#define COCOAPODS_POD_AVAILABLE_CLKSingletons
+#define COCOAPODS_VERSION_MAJOR_CLKSingletons 0
+#define COCOAPODS_VERSION_MINOR_CLKSingletons 1
+#define COCOAPODS_VERSION_PATCH_CLKSingletons 1
+
 // MagicalRecord
 #define COCOAPODS_POD_AVAILABLE_MagicalRecord
 #define COCOAPODS_VERSION_MAJOR_MagicalRecord 2
@@ -101,6 +107,12 @@
 #define COCOAPODS_VERSION_MAJOR_ReactiveCocoa_no_arc 2
 #define COCOAPODS_VERSION_MINOR_ReactiveCocoa_no_arc 4
 #define COCOAPODS_VERSION_PATCH_ReactiveCocoa_no_arc 7
+
+// UIView+Positioning
+#define COCOAPODS_POD_AVAILABLE_UIView_Positioning
+#define COCOAPODS_VERSION_MAJOR_UIView_Positioning 1
+#define COCOAPODS_VERSION_MINOR_UIView_Positioning 1
+#define COCOAPODS_VERSION_PATCH_UIView_Positioning 0
 
 // uicolor-utilities
 #define COCOAPODS_POD_AVAILABLE_uicolor_utilities
