@@ -131,6 +131,26 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     self.bodyLabel.preferredMaxLayoutWidth = self.bounds.size.width - 20;
+    [self.bodyLabel invalidateIntrinsicContentSize];
+}
+
+- (void)didPan:(UIPanGestureRecognizer *)recognizer {
+    [[self signalUponPanning:recognizer] subscribeCompleted:^{}];
+}
+
+- (RACSignal *)signalUponPanning:(UIPanGestureRecognizer *)recognizer {
+    CGPoint point = [recognizer translationInView:self.superview];
+    if (recognizer.state == UIGestureRecognizerStateEnded) {
+        CGPoint velocity = [recognizer velocityInView:self];
+        velocity.x = 0;
+        NSLog(@"panning endede: %@ %@", NSStringFromCGPoint(velocity), NSStringFromCGPoint(point));
+        return [self.dragEndedVelocityCommand execute:[NSValue valueWithCGPoint:velocity]];
+    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
+        NSLog(@"panning began");
+        return [self.dragBeganCommand execute:@YES];
+    } else {
+        return [RACSignal empty];
+    }
 }
 
 @end

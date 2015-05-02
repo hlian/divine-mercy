@@ -2,6 +2,11 @@
 #import "LoginVC.h"
 #import "PostCentaur.h"
 #import "PostView.h"
+#import "MainCell.h"
+#import "MainStylesheet.h"
+
+#define STYLESHEET ([MainStylesheet singleton])
+
 
 @interface PostsCentaur : NSObject <UITableViewDataSource>
 
@@ -57,13 +62,8 @@ static RACSignal *signalOfPosts(void) {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"main" forIndexPath:indexPath];
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
-    cell.contentView.layoutMargins = UIEdgeInsetsMake(10, 5, 10, 5);
-    cell.preservesSuperviewLayoutMargins = NO;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.backgroundColor = [UIColor colorWithRGBAHex:0xf3f6d7ff];
-
+    cell.backgroundColor = STYLESHEET.backColor;
+    cell.contentView.backgroundColor = STYLESHEET.frontColor;
     [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 
     PostView *view = [[PostView alloc] initWithFrame:CGRectNonsense];
@@ -108,7 +108,7 @@ static RACSignal *signalOfPosts(void) {
     t.delegate = self;
     t.estimatedRowHeight = 100;
     t.rowHeight = UITableViewAutomaticDimension;
-    [t registerClass:[UITableViewCell class] forCellReuseIdentifier:@"main"];
+    [t registerClass:[MainCell class] forCellReuseIdentifier:@"main"];
     return t;
 }
 
@@ -117,8 +117,10 @@ static RACSignal *signalOfPosts(void) {
 
     self.view = [[UIView alloc] initWithFrame:CGRectNonsense];
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    self.view.backgroundColor = STYLESHEET.frontColor;
 
     self.tableView = [self makeTableView];
+    self.tableView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.tableView];
 
     RAC(self, posts) = [signalOfPosts() doNext:^(PostsCentaur *posts) {
