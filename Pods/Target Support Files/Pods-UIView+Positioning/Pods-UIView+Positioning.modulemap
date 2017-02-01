@@ -1,6 +1,0 @@
-framework module UIView_Positioning {
-  umbrella header "Pods-UIView+Positioning-umbrella.h"
-
-  export *
-  module * { export * }
-}

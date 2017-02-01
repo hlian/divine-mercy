@@ -1,0 +1,8 @@
+github "ReactiveCocoa/ReactiveCocoa"
+github "ReactiveCocoa/ReactiveObjC"
+github "ReactiveCocoa/ReactiveSwift"
+github "PureLayout/PureLayout"
+github "marmelroy/Localize-Swift"
+github "stephencelis/SQLite.swift"
+github "AFNetworking/AFNetworking"
+github "zdavison/NSString-Ruby"

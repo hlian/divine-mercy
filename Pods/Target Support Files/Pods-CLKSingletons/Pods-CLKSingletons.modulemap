@@ -1,6 +1,0 @@
-framework module CLKSingletons {
-  umbrella header "Pods-CLKSingletons-umbrella.h"
-
-  export *
-  module * { export * }
-}

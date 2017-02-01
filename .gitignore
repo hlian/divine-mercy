@@ -1,3 +1,6 @@
+*.ipa
+*.zip
 .DS_Store
 Secrets.h
 xcuserdata/
+.bundle/
