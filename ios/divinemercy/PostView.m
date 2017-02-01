@@ -95,7 +95,7 @@
     l.translatesAutoresizingMaskIntoConstraints = NO;
     l.numberOfLines = -1;
     l.lineBreakMode = NSLineBreakByWordWrapping;
-    l.font = [UIFont fontWithName:@"Verdana" size:13];
+    l.font = [UIFont systemFontOfSize:13];
     return l;
 }
 
@@ -107,14 +107,14 @@
     UILabel *reply = [[UILabel alloc] initWithFrame:CGRectZero];
     reply.translatesAutoresizingMaskIntoConstraints = NO;
     reply.text = @"[reply]";
-    reply.font = [UIFont fontWithName:@"Verdana" size:13];
+    reply.font = [UIFont systemFontOfSize:13];
     reply.textColor = [UIColor purpleColor];
     [v addSubview:reply];
 
     UILabel *fave = [[UILabel alloc] initWithFrame:CGRectZero];
     fave.translatesAutoresizingMaskIntoConstraints = NO;
     fave.text = @"[favorite]";
-    fave.font = [UIFont fontWithName:@"Verdana" size:13];
+    fave.font = [UIFont systemFontOfSize:13];
     fave.textColor = [UIColor purpleColor];
     [v addSubview:fave];
 

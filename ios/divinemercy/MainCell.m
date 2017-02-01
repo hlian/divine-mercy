@@ -22,9 +22,6 @@
     self.contentView.layoutMargins = UIEdgeInsetsMake(10, 10, 10, 10);
     self.preservesSuperviewLayoutMargins = NO;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    UIGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didPan:)];
-    [self addGestureRecognizer:recognizer];
 }
 
 - (void)didPan:(UIPanGestureRecognizer *)recognizer {
