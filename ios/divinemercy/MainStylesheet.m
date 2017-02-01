@@ -12,7 +12,7 @@
 @implementation MainStylesheet
 
 - (UIColor *)frontColor {
-    return [UIColor colorWithRGBHex:0xf3f6d7];
+    return [UIColor colorWithRGBHex:0xfffcf0];
 }
 
 - (UIColor *)backColor {

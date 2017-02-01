@@ -6,6 +6,8 @@
 //
 //
 
+#import "UIColor+Expanded.h"
+
 #import "PostCentaur.h"
 #import "PostView.h"
 
@@ -13,8 +15,8 @@
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *bodyLabel;
-@property (nonatomic, strong) UIView *actionView;
-
+@property (nonatomic, strong) UILabel *parentTitleView;
+@property (nonatomic, strong) UILabel *parentBodyView;
 
 @end
 
@@ -36,12 +38,14 @@
 
     self.titleLabel = [self makeLabel];
     self.bodyLabel = [self makeBody];
-    self.actionView = [self makeActionView];
+    self.parentTitleView = [self makeParent];
+    self.parentBodyView = [self makeParent];
     [self addSubview:self.titleLabel];
     [self addSubview:self.bodyLabel];
-    [self addSubview:self.actionView];
+    [self addSubview:self.parentTitleView];
+    [self addSubview:self.parentBodyView];
 
-    for (UIView *view in @[self.bodyLabel, self.titleLabel, self.actionView]) {
+    for (UIView *view in @[self.bodyLabel, self.titleLabel, self.parentTitleView, self.parentBodyView]) {
         [view autoMatchDimension:ALDimensionWidth toDimension:ALDimensionWidth ofView:self];
         [view autoAlignAxisToSuperviewAxis:ALAxisVertical];
     }
@@ -50,34 +54,25 @@
 
     [self.titleLabel autoPinEdgeToSuperviewEdge:ALEdgeTop];
     [self.bodyLabel autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.titleLabel withOffset:10];
-    [self.bodyLabel autoPinEdge:ALEdgeBottom toEdge:ALEdgeTop ofView:self.actionView];
-    [self.actionView autoPinEdge:ALEdgeBottom toEdge:ALEdgeBottom ofView:self];
+    [self.parentTitleView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.bodyLabel withOffset:10];
+    [self.parentBodyView autoPinEdge:ALEdgeTop toEdge:ALEdgeBottom ofView:self.parentTitleView withOffset:10];
+    [self.parentBodyView autoPinEdgeToSuperviewEdge:ALEdgeBottom];
 
     RAC(self, titleLabel.text) = [[RACObserve(self, post) ignore:nil] map:^id(PostCentaur *post) {
-        return post.author;
+        return post.post.author;
     }];
 
     RAC(self, bodyLabel.text) = [[RACObserve(self, post) ignore:nil] map:^id(PostCentaur *post) {
-        return post.body;
+        return post.post.body;
     }];
 
-    [[[RACObserve(self, highlightedSignal) switchToLatest] ignore:@NO] subscribeNext:^(id value) {
-        @strongify(self);
-        [NSLayoutConstraint autoSetPriority:UILayoutPriorityDefaultLow forConstraints:^{
-            NSLayoutConstraint *constraint =
-                [self.actionView autoSetDimension:ALDimensionHeight toSize:self.actionHeight relation:NSLayoutRelationEqual];
-            [self layoutIfNeeded];
-            [[[[self.highlightedSignal takeUntil:self.rac_willDeallocSignal] ignore:@YES] take:1] subscribeNext:^(id x) {
-                @strongify(self);
-                [constraint autoRemove];
-                [self layoutIfNeeded];
-            }];
-        }];
+    RAC(self, parentTitleView.text) = [[RACObserve(self, post) ignore:nil] map:^id _Nullable(PostCentaur*  _Nullable post) {
+        return post.parent == nil ? @"n/a" : post.parent.author;
     }];
-}
 
-- (CGFloat)actionHeight {
-    return 44;
+    RAC(self, parentBodyView.text) = [[RACObserve(self, post) ignore:nil] map:^id _Nullable(PostCentaur*  _Nullable post) {
+        return post.parent == nil ? @"n/a" : post.parent.body;
+    }];
 }
 
 - (UILabel *)makeLabel {
@@ -93,63 +88,31 @@
 - (UILabel *)makeBody {
     UILabel *l = [[UILabel alloc] initWithFrame:CGRectNonsense];
     l.translatesAutoresizingMaskIntoConstraints = NO;
-    l.numberOfLines = -1;
+    l.numberOfLines = 0;
     l.lineBreakMode = NSLineBreakByWordWrapping;
     l.font = [UIFont systemFontOfSize:13];
     return l;
 }
 
-- (UIView *)makeActionView {
-    UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
-    v.translatesAutoresizingMaskIntoConstraints = NO;
-    v.clipsToBounds = YES;
-
-    UILabel *reply = [[UILabel alloc] initWithFrame:CGRectZero];
-    reply.translatesAutoresizingMaskIntoConstraints = NO;
-    reply.text = @"[reply]";
-    reply.font = [UIFont systemFontOfSize:13];
-    reply.textColor = [UIColor purpleColor];
-    [v addSubview:reply];
-
-    UILabel *fave = [[UILabel alloc] initWithFrame:CGRectZero];
-    fave.translatesAutoresizingMaskIntoConstraints = NO;
-    fave.text = @"[favorite]";
-    fave.font = [UIFont systemFontOfSize:13];
-    fave.textColor = [UIColor purpleColor];
-    [v addSubview:fave];
-
-
-    [reply autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
-    [reply autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:0];
-    [fave autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
-    [fave autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:reply withOffset:10];
-
-    return v;
+- (UILabel *)makeParent {
+    UILabel *l = [[UILabel alloc] initWithFrame:CGRectNonsense];
+    l.translatesAutoresizingMaskIntoConstraints = NO;
+    l.numberOfLines = 0;
+    l.lineBreakMode = NSLineBreakByWordWrapping;
+    l.font = [UIFont systemFontOfSize:13];
+    l.textColor = [UIColor colorWithRGBHex:0xaaafaf];
+    return l;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.bodyLabel.preferredMaxLayoutWidth = self.bounds.size.width - 20;
+    self.bodyLabel.preferredMaxLayoutWidth = self.bounds.size.width;
     [self.bodyLabel invalidateIntrinsicContentSize];
-}
-
-- (void)didPan:(UIPanGestureRecognizer *)recognizer {
-    [[self signalUponPanning:recognizer] subscribeCompleted:^{}];
-}
-
-- (RACSignal *)signalUponPanning:(UIPanGestureRecognizer *)recognizer {
-    CGPoint point = [recognizer translationInView:self.superview];
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        CGPoint velocity = [recognizer velocityInView:self];
-        velocity.x = 0;
-        NSLog(@"panning endede: %@ %@", NSStringFromCGPoint(velocity), NSStringFromCGPoint(point));
-        return [self.dragEndedVelocityCommand execute:[NSValue valueWithCGPoint:velocity]];
-    } else if (recognizer.state == UIGestureRecognizerStateBegan) {
-        NSLog(@"panning began");
-        return [self.dragBeganCommand execute:@YES];
-    } else {
-        return [RACSignal empty];
-    }
+    self.parentTitleView.preferredMaxLayoutWidth = self.bounds.size.width;
+    [self.parentTitleView invalidateIntrinsicContentSize];
+    self.parentBodyView.preferredMaxLayoutWidth = self.bounds.size.width;
+    [self.parentBodyView invalidateIntrinsicContentSize];
+    [super layoutSubviews];
 }
 
 @end

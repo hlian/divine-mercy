@@ -9,6 +9,16 @@
 
 #define STYLESHEET ([MainStylesheet singleton])
 
+@implementation Post
+
+- (instancetype)initWithAuthor:(nonnull NSString *)author body:(nonnull NSString *)body {
+    Post *post = [super init];
+    post.author = author;
+    post.body = body;
+    return post;
+}
+
+@end
 
 @interface PostsCentaur : NSObject <UITableViewDataSource>
 
@@ -18,16 +28,25 @@
 
 @end
 
-static PostCentaur *postOfJSON(NSDictionary *dict) {
+static PostCentaur *postOfJSON(NSDictionary *dict, NSDictionary *postsByID) {
     PostCentaur *centaur = [[PostCentaur alloc] init];
-    centaur.author = dict[@"user"][@"name"];
-    centaur.body = dict[@"content"];
+    centaur.post = [[Post alloc] initWithAuthor:dict[@"user"][@"name"] body:dict[@"content"]];
+
+    NSNumber *parent = dict[@"idParent"];
+    if (parent != nil) {
+        NSString *content = postsByID[parent][@"content"];
+        centaur.parent = [[Post alloc] initWithAuthor:postsByID[parent][@"user"][@"name"] body:[content ellipsize:100]];
+    }
     return centaur;
 }
 
 static PostsCentaur *postsOfJSON(NSArray *array, MainStylesheet *stylesheet) {
+    NSMutableDictionary *postsByID = [[NSMutableDictionary alloc] initWithCapacity:50];
+    for (NSDictionary *post in array) {
+        postsByID[post[@"id"]] = post;
+    }
     NSArray *posts = [array.rac_sequence map:^id(NSDictionary *dict) {
-        return postOfJSON(dict);
+        return postOfJSON(dict, postsByID);
     }].array;
     PostsCentaur *centaur = [[PostsCentaur alloc] init];
     centaur.stylesheet = stylesheet;
@@ -113,7 +132,7 @@ static RACSignal *signalOfPosts(MainStylesheet *stylesheet) {
     UITableView *t = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 100, 100) style:UITableViewStylePlain];
     t.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     t.delegate = self;
-    t.estimatedRowHeight = 100;
+    t.estimatedRowHeight = 1000;
     t.rowHeight = UITableViewAutomaticDimension;
     [t registerClass:[MainCell class] forCellReuseIdentifier:@"main"];
     return t;
