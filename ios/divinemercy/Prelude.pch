@@ -15,15 +15,10 @@
 @import ReactiveObjC;
 @import AFNetworking;
 @import PureLayout;
+@import HTMLReader;
 #import "NSString+Ruby.h"
 #import "NSURL+QueryDictionary.h"
 
 #define CGRectNonsense ((CGRectMake(100, 100, 100, 100)))
-
-static NSString *kAPI(NSString *s) {
-    NSURLComponents *comp = [NSURLComponents componentsWithString:@"https://basilica.horse/api"];
-    comp.path = [comp.path stringByAppendingPathComponent:s];
-    return comp.URL.absoluteString;
-}
 
 #endif

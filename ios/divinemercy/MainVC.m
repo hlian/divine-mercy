@@ -6,6 +6,9 @@
 #import "PostView.h"
 #import "MainCell.h"
 #import "MainStylesheet.h"
+#import "Network.h"
+#import "Wish.h"
+#import "Batteries.h"
 
 #define STYLESHEET ([MainStylesheet singleton])
 
@@ -22,7 +25,7 @@
 
 @interface PostsCentaur : NSObject <UITableViewDataSource>
 
-@property (nonatomic, strong) NSArray *posts;
+@property (nonatomic, strong) NSArray<PostCentaur *> *posts;
 @property (nonatomic, strong) NSIndexPath *highlightedIndexPath;
 @property (nonatomic, strong) MainStylesheet *stylesheet;
 
@@ -68,11 +71,32 @@ static RACSignal *signalOfPosts(MainStylesheet *stylesheet) {
     }];
 }
 
+static RACSignal *URLsOfPosts(PostsCentaur *posts) {
+    NSError *error = nil;
+    NSString *gruberURLRegex = @"(?i)\\b(?:[a-z][\\w-]+:(?:/{1,3}|[a-z0-9%])|www\\d{0,3}[.]|[a-z0-9.\\-]+[.][a-z]{2,4}/)(?:[^\\s()<>]+|\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\))+(?:\\(([^\\s()<>]+|(\\([^\\s()<>]+\\)))*\\)|[^\\s`!()\\[\\]{};:'\".,<>?«»“”‘’])";
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:gruberURLRegex options:NSRegularExpressionCaseInsensitive error:&error];
+    NSCParameterAssert(error == nil && "URLsOfPosts bad regex");
+    return [RACSignal createSignal:^RACDisposable * _Nullable(id<RACSubscriber>  _Nonnull subscriber) {
+        NSUInteger i = 0;
+        for (PostCentaur *post in posts.posts) {
+            NSArray *matches = [regex matchesInString:post.post.body options:0 range:NSMakeRange(0, post.post.body.length)];
+            for (NSTextCheckingResult *result in matches) {
+                NSString *sub = [post.post.body substringWithRange:result.range];
+                NSURL *url = [NSURL URLWithString:sub];
+                NSCParameterAssert(url != nil && "URLsOfPosts bad URL");
+                [subscriber sendNext:[[IndexedObject alloc] initWithIndex:[NSIndexPath indexPathForRow:i inSection:0] obj:url]];
+            }
+            i++;
+        }
+        return nil;
+    }];
+}
 
 @interface MainVC () <UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) PostsCentaur *posts;
+@property (nonatomic, strong) Wish *wish;
 
 @end
 
@@ -113,6 +137,9 @@ static RACSignal *signalOfPosts(MainStylesheet *stylesheet) {
     NSParameterAssert(self.stylesheet);
 
     [super viewDidLoad];
+
+    self.wish = [[Wish alloc] init];
+
     self.title = @"Divine Mercy";
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:nil action:nil];
@@ -132,7 +159,7 @@ static RACSignal *signalOfPosts(MainStylesheet *stylesheet) {
     UITableView *t = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 100, 100) style:UITableViewStylePlain];
     t.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     t.delegate = self;
-    t.estimatedRowHeight = 1000;
+    t.estimatedRowHeight = 100;
     t.rowHeight = UITableViewAutomaticDimension;
     [t registerClass:[MainCell class] forCellReuseIdentifier:@"main"];
     return t;
@@ -153,26 +180,14 @@ static RACSignal *signalOfPosts(MainStylesheet *stylesheet) {
         @strongify(self);
         self.tableView.dataSource = posts;
         [self.tableView reloadData];
+        [URLsOfPosts(posts) subscribeNext:^(IndexedObject<NSURL *> *x) {
+            [self.wish wishURL:x];
+        }];
     }];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [UIView animateWithDuration:0.2
-                          delay:0
-         usingSpringWithDamping:0.75
-          initialSpringVelocity:0
-                        options:UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         [self.tableView beginUpdates];
-                         if ([self.posts.highlightedIndexPath isEqual:indexPath]) {
-                             self.posts.highlightedIndexPath = nil;
-                         } else {
-                             self.posts.highlightedIndexPath = indexPath;
-                         }
-                         
-                         [self.tableView endUpdates];
-                     } completion:nil];
+    // We used to do stuff, now we don't
 }
 
 @end

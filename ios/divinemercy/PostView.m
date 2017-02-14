@@ -34,8 +34,6 @@
 }
 
 - (void)prepare {
-    @weakify(self);
-
     self.titleLabel = [self makeLabel];
     self.bodyLabel = [self makeBody];
     self.parentTitleView = [self makeParent];

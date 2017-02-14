@@ -1,4 +1,5 @@
 github "AFNetworking/AFNetworking" "3.1.0"
+github "nolanw/HTMLReader" "v2.0.3"
 github "marmelroy/Localize-Swift" "1.7.1"
 github "zdavison/NSString-Ruby" "1.1"
 github "PureLayout/PureLayout" "v3.0.2"

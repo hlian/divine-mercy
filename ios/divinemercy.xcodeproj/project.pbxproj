@@ -25,6 +25,12 @@
 		07985A9C1E426CC800172103 /* AFNetworking.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = 07985A9A1E426CC800172103 /* AFNetworking.framework.dSYM */; };
 		07985A9D1E426CCB00172103 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07985A991E426CC800172103 /* AFNetworking.framework */; };
 		07985A9E1E426CCB00172103 /* AFNetworking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07985A991E426CC800172103 /* AFNetworking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		07C8DBEC1E53990A00E1196F /* Wish.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C8DBEB1E53990A00E1196F /* Wish.m */; };
+		07C8DBEF1E53B55E00E1196F /* Batteries.m in Sources */ = {isa = PBXBuildFile; fileRef = 07C8DBEE1E53B55E00E1196F /* Batteries.m */; };
+		07C8DBF21E53B7DD00E1196F /* HTMLReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C8DBF01E53B7DD00E1196F /* HTMLReader.framework */; };
+		07C8DBF31E53B7DD00E1196F /* HTMLReader.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = 07C8DBF11E53B7DD00E1196F /* HTMLReader.framework.dSYM */; };
+		07C8DBF41E53B7E400E1196F /* HTMLReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07C8DBF01E53B7DD00E1196F /* HTMLReader.framework */; };
+		07C8DBF51E53B7E400E1196F /* HTMLReader.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07C8DBF01E53B7DD00E1196F /* HTMLReader.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		07DE77251E42665A00DCAFA5 /* Localize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DE77191E42665A00DCAFA5 /* Localize_Swift.framework */; };
 		07DE77261E42665A00DCAFA5 /* Localize_Swift.framework.dSYM in Resources */ = {isa = PBXBuildFile; fileRef = 07DE771A1E42665A00DCAFA5 /* Localize_Swift.framework.dSYM */; };
 		07DE77271E42665A00DCAFA5 /* PureLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DE771B1E42665A00DCAFA5 /* PureLayout.framework */; };
@@ -63,6 +69,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				07C8DBF51E53B7E400E1196F /* HTMLReader.framework in Embed Frameworks */,
 				07985A8F1E426CA300172103 /* PureLayout.framework in Embed Frameworks */,
 				07985A911E426CA300172103 /* ReactiveCocoa.framework in Embed Frameworks */,
 				07985A9E1E426CCB00172103 /* AFNetworking.framework in Embed Frameworks */,
@@ -83,6 +90,13 @@
 		07985A891E426A2C00172103 /* UIColor+HSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+HSV.m"; path = "vendor/uicolor-utilities/UIColor+HSV.m"; sourceTree = "<group>"; };
 		07985A991E426CC800172103 /* AFNetworking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AFNetworking.framework; path = Carthage/Build/iOS/AFNetworking.framework; sourceTree = "<group>"; };
 		07985A9A1E426CC800172103 /* AFNetworking.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = AFNetworking.framework.dSYM; path = Carthage/Build/iOS/AFNetworking.framework.dSYM; sourceTree = "<group>"; };
+		07C8DBE91E5240F000E1196F /* Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		07C8DBEA1E53990A00E1196F /* Wish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wish.h; sourceTree = "<group>"; };
+		07C8DBEB1E53990A00E1196F /* Wish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Wish.m; sourceTree = "<group>"; };
+		07C8DBED1E53B55E00E1196F /* Batteries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batteries.h; sourceTree = "<group>"; };
+		07C8DBEE1E53B55E00E1196F /* Batteries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batteries.m; sourceTree = "<group>"; };
+		07C8DBF01E53B7DD00E1196F /* HTMLReader.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HTMLReader.framework; path = Carthage/Build/iOS/HTMLReader.framework; sourceTree = "<group>"; };
+		07C8DBF11E53B7DD00E1196F /* HTMLReader.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = HTMLReader.framework.dSYM; path = Carthage/Build/iOS/HTMLReader.framework.dSYM; sourceTree = "<group>"; };
 		07DE77191E42665A00DCAFA5 /* Localize_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Localize_Swift.framework; path = Carthage/Build/iOS/Localize_Swift.framework; sourceTree = "<group>"; };
 		07DE771A1E42665A00DCAFA5 /* Localize_Swift.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Localize_Swift.framework.dSYM; path = Carthage/Build/iOS/Localize_Swift.framework.dSYM; sourceTree = "<group>"; };
 		07DE771B1E42665A00DCAFA5 /* PureLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PureLayout.framework; path = Carthage/Build/iOS/PureLayout.framework; sourceTree = "<group>"; };
@@ -146,8 +160,10 @@
 				07985A941E426CA300172103 /* ReactiveSwift.framework in Frameworks */,
 				07DE77271E42665A00DCAFA5 /* PureLayout.framework in Frameworks */,
 				07DE772B1E42665A00DCAFA5 /* ReactiveObjC.framework in Frameworks */,
+				07C8DBF41E53B7E400E1196F /* HTMLReader.framework in Frameworks */,
 				07DE77251E42665A00DCAFA5 /* Localize_Swift.framework in Frameworks */,
 				07985A9D1E426CCB00172103 /* AFNetworking.framework in Frameworks */,
+				07C8DBF21E53B7DD00E1196F /* HTMLReader.framework in Frameworks */,
 				07DE77291E42665A00DCAFA5 /* ReactiveCocoa.framework in Frameworks */,
 				07985A921E426CA300172103 /* ReactiveObjC.framework in Frameworks */,
 				07985A901E426CA300172103 /* ReactiveCocoa.framework in Frameworks */,
@@ -222,6 +238,11 @@
 				3F9BB6211AF5800B004C952C /* MainCell.m */,
 				3F9BB6231AF581C0004C952C /* MainStylesheet.h */,
 				3F9BB6241AF581C0004C952C /* MainStylesheet.m */,
+				07C8DBE91E5240F000E1196F /* Network.h */,
+				07C8DBEA1E53990A00E1196F /* Wish.h */,
+				07C8DBEB1E53990A00E1196F /* Wish.m */,
+				07C8DBED1E53B55E00E1196F /* Batteries.h */,
+				07C8DBEE1E53B55E00E1196F /* Batteries.m */,
 			);
 			path = divinemercy;
 			sourceTree = "<group>";
@@ -255,6 +276,8 @@
 		6CE4ABD22585D45F22F532B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07C8DBF01E53B7DD00E1196F /* HTMLReader.framework */,
+				07C8DBF11E53B7DD00E1196F /* HTMLReader.framework.dSYM */,
 				07985A991E426CC800172103 /* AFNetworking.framework */,
 				07985A9A1E426CC800172103 /* AFNetworking.framework.dSYM */,
 				07DE77191E42665A00DCAFA5 /* Localize_Swift.framework */,
@@ -336,6 +359,7 @@
 				3FF2952E1AC4DA22004AB37A /* Main.storyboard in Resources */,
 				3F7DB7C41AC3C30800746DCF /* LaunchScreen.xib in Resources */,
 				07DE772C1E42665A00DCAFA5 /* ReactiveObjC.framework.dSYM in Resources */,
+				07C8DBF31E53B7DD00E1196F /* HTMLReader.framework.dSYM in Resources */,
 				07DE772E1E42665A00DCAFA5 /* ReactiveSwift.framework.dSYM in Resources */,
 				3F7DB7C11AC3C30800746DCF /* Images.xcassets in Resources */,
 				07DE77261E42665A00DCAFA5 /* Localize_Swift.framework.dSYM in Resources */,
@@ -357,6 +381,7 @@
 				07985A8B1E426A2C00172103 /* UIColor+HSV.m in Sources */,
 				3F02C9D31AE8896800BF3C48 /* PostCentaur.m in Sources */,
 				3FAD77391AD49F9500ECA323 /* MainNC.m in Sources */,
+				07C8DBEF1E53B55E00E1196F /* Batteries.m in Sources */,
 				3F7DB7B61AC3C30800746DCF /* AppDelegate.m in Sources */,
 				3F02C9D01AE8893F00BF3C48 /* PostView.m in Sources */,
 				3FAD773C1AD4A03900ECA323 /* LoginVC.m in Sources */,
@@ -365,6 +390,7 @@
 				07DE773B1E4268EB00DCAFA5 /* NSString+Ruby.m in Sources */,
 				3F7DB7BC1AC3C30800746DCF /* MainVC.m in Sources */,
 				07985A8A1E426A2C00172103 /* UIColor+Expanded.m in Sources */,
+				07C8DBEC1E53990A00E1196F /* Wish.m in Sources */,
 				07DE773A1E4268EB00DCAFA5 /* NSMutableString+Ruby.m in Sources */,
 				3F7DB7B91AC3C30800746DCF /* divinemercy.xcdatamodeld in Sources */,
 				3F9BB6221AF5800B004C952C /* MainCell.m in Sources */,
